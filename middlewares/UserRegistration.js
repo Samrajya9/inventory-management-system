@@ -2,12 +2,12 @@ require("dotenv").config();
 const connection  = require('../models/connection.js');
 const bcrypt= require('bcrypt');
 
-const userRegistration = async (req,res,next)=>{
+const userRegistration = async (req,res)=>{
     try {
         const {Full_Name,Contact,Address,Email,Password,Role} =req.body
         // chcecking if the email exists
-        const ExistingUser = await CheckExistinguser(Email) ;
-        if(ExistingUser){
+        const ExistingEmail = await CheckExistinguser(Email) ;
+        if(ExistingEmail){
             res.status(400).json({error:"Email already exist"})
         }else{       
              // Hashing password
@@ -28,7 +28,8 @@ const userRegistration = async (req,res,next)=>{
             )};
     } catch (error) {
         console.log("Error:",error);
-    }   
+    }  
+    
 };
 const CheckExistinguser = async(Email)=>{
     return new Promise((resolve,reject)=>{
@@ -43,4 +44,6 @@ const CheckExistinguser = async(Email)=>{
         });
     })
 };
+
+
 module.exports = userRegistration;
