@@ -15,7 +15,6 @@ app.use(route);
 
 // Server
 const server = async () => {
-  await connection(process.env.HOST,process.env.USER,"",process.env.DATABASE);
   await app.listen(PORT, (err) => {
     if (err) {
       return console.log(err.message);
