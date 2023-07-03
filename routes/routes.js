@@ -5,7 +5,8 @@ const jwt= require('jsonwebtoken')
 const userRegistration = require('../middlewares/UserRegistration')
 const userLogin = require('../middlewares/Userlogin')
 const authenticateToken= require('../middlewares/authenticateToken');
-const DeleteRefreshToken =require('../middlewares/deleterefreshToken')
+const DeleteRefreshToken =require('../middlewares/deleterefreshToken');
+const authenticateRole = require('../middlewares/authenticateRole');
 
 
 routes.get('/',(req,res)=>{
@@ -25,11 +26,12 @@ routes.post('/Login',userLogin);
 routes.delete('/Logout',DeleteRefreshToken);
 
 routes.get('/dashboard',authenticateToken,(req,res)=>{
-    res.send("dashboard")
+    res.send(`${req.payload.Full_Name} ${req.payload.Role}`)
     console.log(req.payload);
 })
-routes.get('/Admin',authenticateToken,(req,res)=>{
+routes.get('/Admin',authenticateToken,authenticateRole("Admin"),(req,res)=>{
     res.send("Admin only")
+    console.log(req.payload);
 })
 
 

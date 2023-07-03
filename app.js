@@ -25,5 +25,4 @@ const server = async () => {
     console.log(`Listining on port ${PORT}`);
   });
 };
-
 server();

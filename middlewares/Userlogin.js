@@ -29,7 +29,7 @@ const userLogin = async (req, res) => {
           }
         );
       });
-      // console.log(data_base_details);
+              console.log(data_base_details);
        // Comparing Password
       const passwordCheck = await bcrypt.compare(Password,data_base_details.Password);
       if (!passwordCheck) {
@@ -45,6 +45,7 @@ const userLogin = async (req, res) => {
             GenerateAccesToken(payload,process.env.ACCEESS_TOKEN_SECRET).then((access_token)=>{
               res.status(200)
               // .json({AccessToken: access_token,message:"Login successful"})
+              console.log(access_token);
             })
             
             // Creating refresh token
