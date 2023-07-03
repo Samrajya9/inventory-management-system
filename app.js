@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const route = require("./routes/routes");
 const connection = require("./models/connection");
+const cookieParser = require('cookie-parser');
 const app = express();
 
 
@@ -10,7 +11,9 @@ const PORT = process.env.PORT || 4000;
 
 // middlewares
 app.use(bodyParser.json())
+app.use(cookieParser());
 app.use(route);
+
 
 
 // Server
